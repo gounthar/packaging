@@ -14,13 +14,13 @@ Running the main package script requires a Ubuntu Linux [18.04](https://releases
 Remark:
 A docker image is available to run the following scripts. It's the only supported environment.
 
-<a name="provided"></a>[![logo](https://img.shields.io/docker/pulls/jenkinsciinfra/packaging?label=jenkinsciinfra%2Fpackaging&logo=docker&logoColor=white)](https://hub.docker.com/r/jenkinsciinfra/packaging)
+[![logo](https://img.shields.io/docker/pulls/jenkinsciinfra/packaging?label=jenkinsciinfra%2Fpackaging&logo=docker&logoColor=white)](https://hub.docker.com/r/jenkinsciinfra/packaging)
 
 Run `docker-compose run --rm packaging bash` to get a shell in the official Docker image for this repository.
 
 <details><summary>Workaround</summary>
 <p>
-If your machine doesn't run this mandatory version of Ubuntu Linux, you can use these scripts within a VM or with the [provided](#provided) Docker image.
+If your machine doesn't run this mandatory version of Ubuntu Linux, you can use these scripts within a VM or with the provided Docker image.
 The use of the Docker image is [not compulsory](https://github.com/jenkinsci/packaging/issues/314#issuecomment-1145088927) but any other environment is not supported.
 
 Run `make setup` to install (most of the) necessary tools. Alternatively you can manually install the following onto a base install of Ubuntu:
@@ -36,21 +36,31 @@ Run `make setup` to install (most of the) necessary tools. Alternatively you can
 * maven
 * java
 
-You also need a Jenkins instance with [dist-fork plugin](https://wiki.jenkins-ci.org/display/JENKINS/DistFork+Plugin)
-installed. URL of this Jenkins can be fed into `make` via the `JENKINS_URL` variable.
-This Jenkins needs to have a Windows build agent that has [WiX Toolset](http://wixtoolset.org/) (currently 3.5), msbuild, [cygwin](https://www.cygwin.com/) and .net 2.0. This build agent is used to build MSI packages, which
+</p>
+</details> 
+
+You will also need a Jenkins instance with [dist-fork plugin](https://wiki.jenkins-ci.org/display/JENKINS/DistFork+Plugin)
+installed. The URL of this Jenkins can be fed into `make` via the `JENKINS_URL` variable.
+If you want to package for Windows, this Jenkins controller needs to have a Windows build agent that has [WiX Toolset](http://wixtoolset.org/) (currently 3.5), msbuild, [cygwin](https://www.cygwin.com/) and .net 2.0. This build agent is used to build MSI packages, which
 can be only built on Windows.
 
-You'll also need a `jenkins.war` file that you are packaging, which comes from the release process.
-The location of this file is set via the `WAR` variable.
+You'll also need:
+ * a `jenkins.war` file that you are packaging, which comes from the [release process](https://www.jenkins.io/download/).
+The location of this file is set via the `WAR` variable. 
+ * a `jenkins.msi` file if you are packaging for Windows, which also comes from the [release process](https://www.jenkins.io/download/thank-you-downloading-windows-installer).
 
-Remark:
+<details><summary>Download and reference `jenkins.war`</summary><p>
 
-A docker image is available to run following script
+```bash
+curl https://get.jenkins.io/war-stable/2.332.3/jenkins.war --output jenkins.war
+# or  jv download
+export WAR=/srv/releases/jenkins/jenkins.war
+# if you want to build for windows
+curl https://get.jenkins.io/windows-stable/2.332.3/jenkins.msi --output jenkins.msi
+export MSI=/srv/releases/jenkins/jenkins.msi
+```
 
-[![logo](https://img.shields.io/docker/pulls/jenkinsciinfra/packaging?label=jenkinsciinfra%2Fpackaging&logo=docker&logoColor=white)](https://hub.docker.com/r/jenkinsciinfra/packaging)
-
-Run `docker-compose run --rm packaging bash` to get a shell in the official Docker image for this repository.
+</p></details>
 
 # Generating packages
 Run `./prep.sh` to perform the preparatory actions of downloading the WAR and importing the GPG key.

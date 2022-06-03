@@ -21,7 +21,7 @@ Run `docker-compose run --rm packaging bash` to get a shell in the official Dock
 <details><summary>Workaround</summary>
 <p>
 If your machine doesn't run this mandatory version of Ubuntu Linux, you can use these scripts within a VM or with the provided Docker image.
-The use of the Docker image is [not compulsory](https://github.com/jenkinsci/packaging/issues/314#issuecomment-1145088927) but any other environment is not supported.
+The use of the Docker image is <a href="https://github.com/jenkinsci/packaging/issues/314#issuecomment-1145088927">not compulsory</a> but any other environment is not supported.
 
 Run `make setup` to install (most of the) necessary tools. Alternatively you can manually install the following onto a base install of Ubuntu:
 * make

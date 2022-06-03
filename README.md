@@ -9,8 +9,21 @@ The following platforms are currently supported:
   * OpenSUSE RPM: `suse/`
 
 # Pre-requisites
-Running the main package script requires a Linux environment (currently Ubuntu, see [JENKINS-27744](https://issues.jenkins-ci.org/browse/JENKINS-27744).)
-Run `make setup` to install (most of the) necessary tools.  Alternatively you can manually install the following onto a base install of Ubuntu:
+Running the main package script requires a Ubuntu Linux [18.04](https://releases.ubuntu.com/18.04/) environment (see [JENKINS-27744](https://issues.jenkins-ci.org/browse/JENKINS-27744).)
+
+Remark:
+A docker image is available to run the following scripts. It's the only supported environment.
+
+<a name="provided"></a>[![logo](https://img.shields.io/docker/pulls/jenkinsciinfra/packaging?label=jenkinsciinfra%2Fpackaging&logo=docker&logoColor=white)](https://hub.docker.com/r/jenkinsciinfra/packaging)
+
+Run `docker-compose run --rm packaging bash` to get a shell in the official Docker image for this repository.
+
+<details><summary>Workaround</summary>
+<p>
+If your machine doesn't run this mandatory version of Ubuntu Linux, you can use these scripts within a VM or with the [provided](#provided) Docker image.
+The use of the Docker image is [not compulsory](https://github.com/jenkinsci/packaging/issues/314#issuecomment-1145088927) but any other environment is not supported.
+
+Run `make setup` to install (most of the) necessary tools. Alternatively you can manually install the following onto a base install of Ubuntu:
 * make
 * unzip
 * devscripts
